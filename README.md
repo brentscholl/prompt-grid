@@ -6,6 +6,8 @@ never presses Return or submits the prompt.
 
 **0.1.0 · macOS 14+ · Universal Apple Silicon / Intel build**
 
+![Prompt Grid with generic example cards for reviewing, explaining, and testing code](docs/images/prompt-grid.jpg)
+
 Independent software, not affiliated with or endorsed by OpenAI. Automatic
 pasting requires the Codex desktop app and a Mac supported by that app.
 Prompt Grid's universal binary does not change Codex's system requirements.
@@ -46,6 +48,15 @@ earlier paste. Each copied prompt ends in a space.
 - Drag a card or its move handle. Cards slide aside to preview the drop.
 - Release to save the order; Escape cancels a drag or closes the editor.
 - Command-N creates a prompt. Deletion requires confirmation.
+
+### Make each prompt your own
+
+Give a card a name, write the text to paste, and choose its color.
+
+![Editing a generic explanation prompt and choosing its card color](docs/images/edit-prompt.jpg)
+
+Screenshots use generic demo prompts in a separate app profile. Fresh installs
+start with three example cards; you can add your own.
 
 ## Privacy and saved data
 
