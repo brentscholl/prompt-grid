@@ -1,0 +1,14 @@
+node_modules/
+build/
+dist/
+.DS_Store
+Web/output.css
+.env
+.env.*
+*.p12
+*.p8
+*.mobileprovision
+# Local artwork experiments and an obsolete screenshot are not release sources.
+Assets/*.png
+Assets/*.iconset/
+PromptGrid-preview.png

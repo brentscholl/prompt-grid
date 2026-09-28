@@ -1,0 +1,181 @@
+@import "tailwindcss";
+
+@source "./index.html";
+@source "./app.js";
+
+@theme {
+  --font-sans: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", sans-serif;
+}
+
+@layer base {
+  html {
+    color-scheme: dark;
+  }
+
+  body {
+    min-width: 640px;
+    min-height: 100vh;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  button,
+  input,
+  textarea {
+    font: inherit;
+  }
+
+  .prompt-card,
+  [data-drag-handle] {
+    -webkit-user-drag: none;
+    touch-action: none;
+  }
+}
+
+@layer utilities {
+  .color-option {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    cursor: pointer;
+  }
+  .color-option input {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    opacity: 0;
+  }
+  .color-swatch {
+    display: grid;
+    place-items: center;
+    width: 34px;
+    height: 34px;
+    border: 1px solid var(--swatch);
+    border-radius: 10px;
+    color: white;
+    background: linear-gradient(140deg, color-mix(in srgb, var(--swatch) 55%, #0f172a), #0f172a);
+  }
+  .color-swatch > span { visibility: hidden; }
+  .color-option input:checked + .color-swatch {
+    box-shadow: 0 0 14px color-mix(in srgb, var(--swatch) 30%, transparent);
+    outline: 2px solid var(--swatch);
+    outline-offset: 3px;
+  }
+  .color-option input:checked + .color-swatch > span { visibility: visible; }
+  .color-option input:focus-visible + .color-swatch { outline: 2px solid white; outline-offset: 3px; }
+  .color-name { font-size: 10px; color: #94a3b8; }
+  .color-option input:checked ~ .color-name { color: var(--swatch); }
+
+  /* Layered borders and restrained light tie the header into the colored card grid. */
+  .brand-mark {
+    border: 1px solid transparent;
+    background: linear-gradient(145deg, #123144, #15182f 55%, #291a40) padding-box,
+      linear-gradient(135deg, #67e8f9aa, #818cf855 50%, #c084fc99) border-box;
+    box-shadow: inset 0 1px 0 #ffffff12, 0 0 22px #22d3ee14, 0 8px 22px #8b5cf618;
+  }
+
+  .brand-mark svg { filter: drop-shadow(0 0 5px #67e8f933); }
+
+  .neon-action {
+    border: 1px solid transparent;
+    background: linear-gradient(115deg, #12394a, #23284b 52%, #382550) padding-box,
+      linear-gradient(110deg, #67e8f9bb, #818cf877 48%, #c084fcbb) border-box;
+    box-shadow: inset 0 1px 0 #ffffff12, inset 0 -1px 12px #818cf80c,
+      0 0 18px #22d3ee12, 0 6px 22px #8b5cf620;
+    text-shadow: 0 0 12px #c4b5fd30;
+    transition: box-shadow 180ms ease, filter 180ms ease, transform 180ms ease;
+  }
+
+  .neon-action svg {
+    color: #a5f3fc;
+    filter: drop-shadow(0 0 4px #22d3ee66);
+  }
+
+  .neon-action:hover {
+    filter: brightness(1.18);
+    transform: translateY(-1px);
+    box-shadow: inset 0 1px 0 #ffffff20, 0 0 22px #22d3ee24, 0 8px 28px #8b5cf630;
+  }
+
+  .neon-action:active { transform: translateY(0); filter: brightness(1.05); }
+
+  @media (prefers-reduced-motion: reduce) {
+    .neon-action { transition: none; }
+    .neon-action:hover { transform: none; }
+  }
+
+  .drag-ghost {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 100;
+    margin: 0;
+    list-style: none;
+    pointer-events: none;
+    transition: none;
+    will-change: transform;
+    filter: drop-shadow(0 18px 24px rgb(0 0 0 / 0.45));
+  }
+
+  .drag-placeholder {
+    border-radius: 1rem;
+    outline: 2px dashed #818cf8;
+    outline-offset: -2px;
+    background: rgb(99 102 241 / 0.12);
+  }
+
+  .drag-placeholder > * { visibility: hidden; }
+
+  .drag-placeholder::after {
+    content: "Drop here";
+    position: absolute;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    color: #c7d2fe;
+    font-size: 14px;
+    font-weight: 600;
+  }
+
+  /* Show the drag cursor only after a card starts moving. */
+  body.cursor-grabbing [data-drag-id],
+  body.cursor-grabbing [data-drag-handle],
+  body.cursor-grabbing .prompt-card {
+    cursor: grabbing;
+  }
+
+  .line-clamp-4 {
+    display: -webkit-box;
+    overflow: hidden;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 4;
+  }
+
+  dialog::backdrop {
+    background: rgb(2 6 23 / 0.78);
+    backdrop-filter: blur(2px);
+  }
+
+  dialog[open] {
+    animation: dialog-in 150ms ease-out;
+  }
+
+  .toast-visible {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes dialog-in {
+  from {
+    transform: translateY(8px) scale(0.98);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "name": "prompt-grid",
+  "version": "0.1.0",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "build:css": "tailwindcss -i ./Web/input.css -o ./Web/output.css --minify",
+    "build": "./Scripts/build.sh",
+    "test": "node --test Tests/*.test.cjs",
+    "release": "./Scripts/release.sh"
+  },
+  "devDependencies": {
+    "@tailwindcss/cli": "^4.0.0",
+    "tailwindcss": "^4.0.0"
+  }
+}
